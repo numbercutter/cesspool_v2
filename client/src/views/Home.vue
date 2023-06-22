@@ -2,8 +2,8 @@
   <div class="content_grid home">
     <div class="top_container">
       <div class="top_content">
-        <h1>WELCOME</h1>
-        <p>CREATE - CONSERVE - NATUREFI</p>
+        <h1>CESSPOOL.COMPANY</h1>
+        <p>EAT SHIT, GET RUGGED</p>
       </div>
     </div>
     <div class="login_container">
