@@ -13,6 +13,7 @@
     "@walletconnect/web3-provider": "^1.7.8",
     "aos": "^3.0.0-beta.6",
     "compression-webpack-plugin": "6.1.1",
+    "ethers": "^5.7.0",
     "core-js": "^3.6.5",
     "primevue": "^3.15.0",
     "vue": "^3.0.0",
