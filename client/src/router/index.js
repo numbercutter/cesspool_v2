@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Marketplace from '../views/Marketplace.vue'
-import NftDetails from '../views/NftDetails.vue'
+import CESS4CESSDetails from '../vaults/CESS4CESSDetails.vue'
 import Shitcans from '../views/Shitcans.vue'
 
 const routes = [
@@ -21,9 +21,9 @@ const routes = [
     component: Shitcans
   },
   {
-    path: '/NftDetails/:id',
-    name: 'NftDetails',
-    component: NftDetails,
+    path: '/CESS4CESSDetails',
+    name: 'CESS4CESSDetails',
+    component: CESS4CESSDetails,
     props: true
   },
   
