@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Marketplace from '../views/Marketplace.vue'
-import CESS4CESSDetails from '../vaults/CESS4CESSDetails.vue'
-import Shitcans from '../views/Shitcans.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import Marketplace from '../views/Marketplace.vue';
+import CESS4CESSDetails from '../vaults/CESS4CESSDetails.vue';
+import Shitcans from '../views/Shitcans.vue';
+import store from '../store' // Ensure you import the store
 
 const routes = [
   {
@@ -24,18 +25,28 @@ const routes = [
     path: '/CESS4CESSDetails',
     name: 'CESS4CESSDetails',
     component: CESS4CESSDetails,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      const address = store.getters.address;
+      console.log(address)
+      const cess = store.getters.cess;
+      console.log(cess)
+      if (!address) {
+        next('/Shitcans'); 
+      } else {
+        next();
+      }
+    },
   },
-  
-
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior() {
-      document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
   }
-})
+});
 
-export default router
+export default router;
+
