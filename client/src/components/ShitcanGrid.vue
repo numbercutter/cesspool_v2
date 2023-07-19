@@ -1,15 +1,5 @@
 <template>
     <div class="listing_container">
-      <div class="filter">
-          <h1>{{ gridTitle }}</h1>
-          <label for="cars">Filter:</label>
-          <select name="cars" id="cars">
-              <option value="volvo">Lowest Price</option>
-              <option value="saab">Highest Price</option>
-              <option value="opel">Lowest ID</option>
-              <option value="audi">Highest ID</option>
-          </select>
-      </div>
       <div class="grid">
           <ShitcanCard 
               :name="'CESS4CESSDetails'"

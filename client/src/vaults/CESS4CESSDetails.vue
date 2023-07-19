@@ -1,30 +1,12 @@
 <template>
   <div id="vault_container">
-      <template v-if="isBalanced">
+
+      <template>
           <div id="grid-view">
               <div class="title_container">
                   <div class="header_container">
                       <h2>CESS Vault</h2>
-                  </div>
-              </div>
-              <div class="content_container">
-                  <div class="writeup_container">
-                      <span>
-                          <p>Aprox. APR: <span class="fill"> {{ ror }} </span> %</p>
-                      </span>
-                      <span>
-                          <p>Available Earnings: <span class="fill"> {{ earningsAfterFee }} </span> $CESS</p>
-                      </span>
-                      <button @click="vaultModal = true">ENTER</button>
-                  </div>
-              </div>
-          </div>
-      </template>
-      <template v-else>
-          <div id="grid-view">
-              <div class="title_container">
-                  <div class="header_container">
-                      <h2>CESS Vault</h2>
+                      
                   </div>
               </div>
               <div class="content_container">
@@ -42,6 +24,7 @@
               <div id="staking_container">
                   <div class="header">
                       <h1>CESSPOOL VAULT</h1>
+                      <button @click="shitcanInfoModal = !shitcanInfoModal">Shitcan Info</button>
                       <span>
                           <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
                       </span>
@@ -77,7 +60,7 @@
                       </div>
                   </template>
                   <br>
-                  <a @click="vaultModal = false">Close</a>
+                  <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
               </div>
           </template>
           <template v-else>
@@ -88,9 +71,33 @@
                   </span>
                   <p>You must own $CESS token to utilize this vault...</p>
                   <button @click="extractLiquidityFunction">BUY HERE</button>
-                  <button @click="vaultModal = false">Close</button>
+                  <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
               </div>
           </template>
+          
+          <div v-show="shitcanInfoModal" class="modal-container">
+            <div class="header">
+            <h1>Shitcan Information</h1>
+            <p>
+                CESSPOOL STAKING - ALLOCATE TOKENS - CHOOSE LOCK TIME - CLAIM REWARDS
+                <br>
+                SHITCAN BURN FEE: The shitcan has a usage fee that is applied when stakers claim rewards.
+                This fee is calculated in a dissolving fashion, relative to time staked.
+                <br>
+                When adding to currently staked tokens, shitcan fee is applied
+                <br>
+                HOW IS THIS FEE CALCULATED?
+                CESS-4-CESS Shitcan - DAY 1 = 60% || DAY 365 = 1%
+                <br>
+                The moment someone puts their tokens into the shitcan, fee degeneration begins and continues throughout the entirety of a year.
+                Beginning at 60% and ending at 1%.
+                <br>
+                This fee is only applied to the claimed rewards and is funneled to the BSC Burn Address
+                <br>
+                *Shitcan excludes CESSPOOL transaction tax*
+            </p>
+            </div>
+        </div>
       </div>
   </div>
 </template>
@@ -122,7 +129,8 @@ export default {
         const signer = provider.getSigner();
         const cesspoolSC = new Contract(store.state.cesspoolContract.address, store.state.cesspoolContract.abi, signer);
         const cess4cessSC = new Contract(cessVaultAddress, cessVaultABI, signer);
-        
+        const shitcanInfoModal = ref(false) // Add this line
+
         const lockNumber = ref(1)
         const days = ref(1)
         const balanceAmount = ref(store.state.cess)
@@ -130,7 +138,7 @@ export default {
         const earningsAfterFee = ref(null)
         const ror = ref(null)
         const timeRemaining = ref(null)
-        const vaultModal = ref(false)
+        const vaultModal = ref(true)
 
 
         const getStakedData = async () => {
@@ -245,6 +253,7 @@ export default {
             days,
             balanceAmount,
             stakedAmount,
+            shitcanInfoModal,
             vaultModal,
             isBalanced: computed(() => balanceAmount.value > 0),
             isStaked: computed(() => stakedAmount.value > 0),
