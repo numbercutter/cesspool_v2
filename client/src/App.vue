@@ -39,8 +39,9 @@ export default {
     const isActive = ref(false)
     const lightMode = async () => {
       isActive.value = !isActive.value;
-      return
-    }
+      document.body.classList.toggle("light_mode", isActive.value);
+    };
+
 
     return {
       isActive,

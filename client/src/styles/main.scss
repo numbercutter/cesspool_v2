@@ -1,17 +1,18 @@
-$background-color: linear-gradient(45deg, #333333 0%, #3a3800 100%);
-$background-color-light: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
-$background-nav: rgb(38, 124, 88);
-$background-top: rgb(61, 61, 61);
-$background-top-light: rgb(38, 124, 88);
-$background-login: rgb(237, 255, 159);
-$background-login-light: rgb(0, 255, 149);
-$background-grid: rgb(61, 61, 61);
-$background-grid-light: rgb(38, 124, 88);
-$background-filter: rgb(61, 61, 61);
-$background-filter-light: rgb(38, 124, 88);
-$primary-color: rgb(0, 253, 110);
-$secondary-color: rgb(255, 241, 173);
+$background-color: linear-gradient(45deg, #FFD300 0%, #FF5733 100%);
+$background-color-light: linear-gradient(45deg, #CCFF00 0%, #FF61A6 100%);
+$background-nav: rgb(255, 235, 59);
+$background-top: rgb(255, 105, 97);
+$background-top-light: rgb(255, 20, 147);
+$background-login: rgb(255, 253, 56);
+$background-login-light: rgb(255, 61, 130);
+$background-grid: rgb(255, 105, 97);
+$background-grid-light: rgb(255, 20, 147);
+$background-filter: rgb(255, 105, 97);
+$background-filter-light: rgb(255, 20, 147);
+$primary-color: rgb(255, 255, 0);
+$secondary-color: rgb(255, 85, 85);
 $text-primary: rgb(255, 255, 255);
+
 
 
 
@@ -33,17 +34,19 @@ html {
     height: 100vh;
     
   }
-body {
-  background-image: $background-color;
-  width: 100% !important;
-  font-family: pFont;
-  //background-image: url('~@/assets/img/checkered.webp');
-
-  height: 100%;
+  body {
+    width: 100% !important;
+    font-family: pFont;
+    height: 100%;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+  }
+  
+  .light_mode body {
+    background-image: $background-color-light;
+  }
+  
 
 nav {
     z-index:1
@@ -142,6 +145,7 @@ nav {
     margin-left: 24px;
     margin-right: 24px;
     display: grid;
+    margin-top: 24px;
     padding: 10px;
     border-radius: 5px;
     @media (min-width: 768px) {
