@@ -4,9 +4,16 @@
           <ShitcanCard 
               :name="'CESS4CESSDetails'"
               :image="'https://static01.nyt.com/images/2014/07/23/upshot/23UP-cat/23UP-cat-articleLarge.jpg?quality=75&auto=webp&disable=upscale'"
-              :vehicles="'222222'"
+              :vehicles="'CESS 4 CESS VAULT'"
               :availableEarnings="'$222'"
-              :approximateReturn="'THE DEMON SLAYER'"
+              :approximateReturn="'STAKING VAULT'"
+          />
+          <ShitcanCard 
+              :name="'PSWAPCESSBNBDetails'"
+              :image="'https://static01.nyt.com/images/2014/07/23/upshot/23UP-cat/23UP-cat-articleLarge.jpg?quality=75&auto=webp&disable=upscale'"
+              :vehicles="'LIQUIDITY POOL VAULT'"
+              :availableEarnings="'$333'"
+              :approximateReturn="'STAKING VAULT'"
           />
       </div>
     </div>

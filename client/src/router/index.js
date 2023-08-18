@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Marketplace from '../views/Marketplace.vue';
 import CESS4CESSDetails from '../vaults/CESS4CESSDetails.vue';
+import PSWAPCESSBNBDetails from '../vaults/PSWAPCESSBNBDetails.vue';
 import Shitcans from '../views/Shitcans.vue';
 import store from '../store' // Ensure you import the store
 
@@ -25,6 +26,23 @@ const routes = [
     path: '/CESS4CESSDetails',
     name: 'CESS4CESSDetails',
     component: CESS4CESSDetails,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      const address = store.getters.address;
+      console.log(address)
+      const cess = store.getters.cess;
+      console.log(cess)
+      if (!address) {
+        next('/Shitcans'); 
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/PSWAPCESSBNBDetails',
+    name: 'PSWAPCESSBNBDetails',
+    component: PSWAPCESSBNBDetails,
     props: true,
     beforeEnter: (to, from, next) => {
       const address = store.getters.address;

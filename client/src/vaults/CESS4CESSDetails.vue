@@ -1,24 +1,6 @@
 <template>
   <div id="vault_container">
 
-      <template>
-          <div id="grid-view">
-              <div class="title_container">
-                  <div class="header_container">
-                      <h2>CESS Vault</h2>
-                      
-                  </div>
-              </div>
-              <div class="content_container">
-                  <div class="writeup_container">
-                      <span>
-                          <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
-                      </span>
-                      <button @click="vaultModal = true">ENTER</button>
-                  </div>
-              </div>
-          </div>
-      </template>
       <div v-show="vaultModal" class="modal-container">
           <template v-if="isBalanced">
               <div id="staking_container">
@@ -102,9 +84,10 @@
   </div>
 </template>
 
-
-
-
+  
+  
+  
+  
 <script>
 import { cessVaultAddress, cessVaultABI } from '../contracts/cess4cess.sol/cess4cess';
 import { ref, onMounted, computed, watch } from 'vue'

@@ -1,42 +1,5 @@
 <template>
     <div id="vault_container">
-        <template v-if="isBalanced">
-            <div id="grid-view">
-                <div class="title_container">
-                    <div class="header_container">
-                        <h2>CESS Vault</h2>
-                    </div>
-                </div>
-                <div class="content_container">
-                    <div class="writeup_container">
-                        <span>
-                            <p>Aprox. APR: <span class="fill"> {{ ror }} </span> %</p>
-                        </span>
-                        <span>
-                            <p>Available Earnings: <span class="fill"> {{ earningsAfterFee }} </span> $CESS</p>
-                        </span>
-                        <button @click="vaultModal = true">ENTER</button>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <template v-else>
-            <div id="grid-view">
-                <div class="title_container">
-                    <div class="header_container">
-                        <h2>CESS Vault</h2>
-                    </div>
-                </div>
-                <div class="content_container">
-                    <div class="writeup_container">
-                        <span>
-                            <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
-                        </span>
-                        <button @click="vaultModal = true">ENTER</button>
-                    </div>
-                </div>
-            </div>
-        </template>
         <div v-show="vaultModal" class="modal-container">
             <template v-if="isBalanced">
                 <div id="staking_container">
