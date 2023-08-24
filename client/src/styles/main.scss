@@ -1,17 +1,20 @@
 $background-color: linear-gradient(45deg, #FFD300 0%, #FF5733 100%);
 $background-color-light: linear-gradient(45deg, #CCFF00 0%, #FF61A6 100%);
-$background-nav: rgb(255, 235, 59);
-$background-top: rgb(255, 105, 97);
+$background-nav: rgb(166, 255, 0);
+$background-top: #555555;
 $background-top-light: rgb(255, 20, 147);
-$background-login: rgb(255, 253, 56);
+$background-login: rgb(166, 255, 0);
 $background-login-light: rgb(255, 61, 130);
-$background-grid: rgb(255, 105, 97);
+$background-grid: #20232a;
 $background-grid-light: rgb(255, 20, 147);
-$background-filter: rgb(255, 105, 97);
+$background-filter: #3e3e3e;
 $background-filter-light: rgb(255, 20, 147);
-$primary-color: rgb(255, 255, 0);
-$secondary-color: rgb(255, 85, 85);
-$text-primary: rgb(255, 255, 255);
+$primary-color: rgb(166, 255, 0);
+$secondary-color: #282c34;
+$text-primary: #c0c0c0; // Subtle silver
+// Font definitions
+$headerFont: headerFont;
+$pFont: pFont;
 
 
 
@@ -36,7 +39,8 @@ html {
   }
   body {
     width: 100% !important;
-    font-family: pFont;
+    font-family: $pFont; // Primary font
+
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -154,6 +158,138 @@ nav {
         margin-left: 200px;
     }
 }
+#vault_container {
+    .modal-container {
+      background: linear-gradient(to bottom, #3e3e3e, $background-grid); // Metallic gradient
+      border-radius: 5px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      color: $text-primary;
+  
+      .header-section {
+        font-family: $headerFont;
+        background: linear-gradient(to right, #555, $background-top); // Shaded gradient
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        h1 {
+          font-family: $headerFont;
+        }
+        .info-button {
+          background-color: $secondary-color;
+          color: $text-primary;
+          border: none;
+          padding: 5px 10px;
+          cursor: pointer;
+          &:hover {
+            background-color: darken($secondary-color, 10%); // Darken on hover
+            transition: background-color 0.3s ease;
+          }
+        }
+        .apr-info {
+          font-weight: bold;
+        }
+  
+        @media (max-width: 767.98px) {
+          font-size: 12px;
+        }
+      }
+  
+  
+      .lock-section, .unlock-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        .slider-wrapper {
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .amount, .time {
+            font-size: 16px;
+          }
+        }
+  
+        .button-container {
+            .stake-button, .unstake-button, .collect-button {
+              background-color: $secondary-color;
+              color: $text-primary;
+              border: none;
+              padding: 10px 20px;
+              cursor: pointer;
+              margin: 10px 0;
+              width: 100%;
+              text-align: center;
+              font-size: 16px;
+              &:hover {
+                background-color: darken($secondary-color, 10%); // Darken on hover
+                transition: background-color 0.3s ease;
+              }
+            }
+          }
+        }
+  
+      .staked-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span {
+          font-size: 16px;
+        }
+      }
+  
+      .back-link {
+        text-align: center;
+        a {
+          color: $text-primary;
+        }
+      }
+  
+      .info-container {
+        .header-section {
+          background-color: $background-filter;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      }
+  
+      @media (min-width: 768px) {
+          .slider-wrapper, .button-container {
+            width: 45%;
+          }
+        }
+      }
+    }
+
+  
+  .buy-button {
+    background-color: $primary-color;
+    color: $text-primary;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .light_mode {
+    #vault_container {
+      .modal-container {
+        background-color: $background-grid-light;
+        .header-section {
+          background-color: $background-top-light;
+        }
+        .info-container {
+          .header-section {
+            background-color: $background-filter-light;
+          }
+        }
+      }
+    }
+  }
+  
+  
 .details_wrapper {
     box-sizing: border-box;
     padding: 40px 0px;
@@ -208,17 +344,19 @@ nav {
     }
 }
 
+
+
 @font-face {
     font-family: myFirstFont;
     src: url(./assets/fonts/c.ttf);
   }
   @font-face {
     font-family: pFont;
-    src: url(./assets/fonts/c.ttf);
+    src: url(./assets/fonts/h.ttf);
   }
   @font-face {
     font-family: headerFont;
-    src: url(./assets/fonts/b.ttf);
+    src: url(./assets/fonts/c.ttf);
   }
   @font-face {
     font-family: headerFontTwo;

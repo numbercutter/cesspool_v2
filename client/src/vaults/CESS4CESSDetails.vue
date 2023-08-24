@@ -1,88 +1,83 @@
 <template>
-  <div id="vault_container">
-
-      <div v-show="vaultModal" class="modal-container">
-          <template v-if="isBalanced">
-              <div id="staking_container">
-                  <div class="header">
-                      <h1>CESSPOOL VAULT</h1>
-                      <button @click="shitcanInfoModal = !shitcanInfoModal">Shitcan Info</button>
-                      <span>
-                          <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
-                      </span>
-                  </div>
-                  <div class="lock">
-                      <slider v-model="lockNumber" color="black" track-color="green" :height='15' :max="balanceAmount" :min="0"/>
-                      <span>
-                          <p>Locking Amount: <span class="fill"> {{ lockNumber }} </span> $CESS</p>
-                      </span>
-                      <slider v-model="days" color="black" track-color="green" :height='15' :max="365" :min="1"/>
-                      <span>
-                          <p>Locking Time (BETWEEN 1 AND 365 DAYS): <span class="fill"> {{ days }} </span> DAY(S)</p>
-                      </span>
+    <div id="vault_container">
+        <div v-show="vaultModal" class="modal-container">
+            <template v-if="isBalanced">
+                <div id="staking_container">
+                    <div class="header-section">
+                        <h1>CESSPOOL VAULT</h1>
+                        <button class="info-button" @click="shitcanInfoModal = !shitcanInfoModal">Shitcan Info</button>
+                        <span class="apr-info"><p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p></span>
+                    </div>
+                    <div class="lock-section">
+                        <div class="slider-wrapper">
+                            <slider v-model="lockNumber" color="black" track-color="green" :height='15' :max="balanceAmount" :min="0"/>
+                            <span class="amount"><p>Locking Amount: <span class="fill"> {{ lockNumber }} </span> $CESS</p></span>
+                            <slider v-model="days" color="black" track-color="green" :height='15' :max="365" :min="1"/>
+                            <span class="time"><p>Locking Time (BETWEEN 1 AND 365 DAYS): <span class="fill"> {{ days }} </span> DAY(S)</p></span>
+                        </div>
+                        <button class="stake-button" @click="lockLiquidity">Stake</button>
+                    </div>
+                    <template v-if="isStaked">
+                        <div class="unlock-section">
+                            <div class="staked-info">
+                                <span><p>Currently Staked: <span class="fill"> {{ stakedAmount }} </span> $CESS</p></span>
+                                <span><p>Available Earnings: <span class="fill"> {{ earningsAfterFee }} </span> $CESS</p></span>
+                                <span><p>Lock Time Remaining: <span class="fill"> {{ timeRemaining }} </span> Days</p></span>
+                            </div>
+                            <div class="buttons">
+                                <template v-if="isUnlocked">
+                                    <button class="unstake-button" @click="extractLiquidityFunction">Unstake</button>
+                                </template>
+                                <button class="collect-button" @click="extractEarningsFunction">Collect Earnings</button>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="back-link">
+                      <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="header-section">
+                    <h1>CESS4CESS VAULT</h1>
+                    <span class="apr-info">
+                        <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
+                    </span>
+                    <p>You must own $CESS token to utilize this vault...</p>
+                    <button class="buy-button" @click="extractLiquidityFunction">BUY HERE</button>
+                    <div class="back-link">
+                      <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
+                    </div>
+                </div>
+            </template>
+            
+            <div v-show="shitcanInfoModal" class="info-container">
+              <div class="header-section">
+                  <h1>Shitcan Information</h1>
+                  <p>
+                      CESSPOOL STAKING - ALLOCATE TOKENS - CHOOSE LOCK TIME - CLAIM REWARDS
                       <br>
-                      <button @click="lockLiquidity">Stake</button>
-                  </div>
-                  <template v-if="isStaked">
-                      <div class="unlock">
-                          <span>
-                              <p>Currently Staked: <span class="fill"> {{ stakedAmount }} </span> $CESS</p>
-                          </span>
-                          <span>
-                              <p>Available Earnings: <span class="fill"> {{ earningsAfterFee }} </span> $CESS</p>
-                          </span>
-                          <span>
-                              <p>Lock Time Remaining: <span class="fill"> {{ timeRemaining }} </span> Days</p>
-                          </span>
-                          <br>
-                          <template v-if="isUnlocked">
-                              <button @click="extractLiquidityFunction">Unstake</button>
-                          </template>
-                          <button @click="extractEarningsFunction">Collect Earnings</button>
-                      </div>
-                  </template>
-                  <br>
-                  <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
+                      SHITCAN BURN FEE: The shitcan has a usage fee that is applied when stakers claim rewards.
+                      This fee is calculated in a dissolving fashion, relative to time staked.
+                      <br>
+                      When adding to currently staked tokens, shitcan fee is applied
+                      <br>
+                      HOW IS THIS FEE CALCULATED?
+                      CESS-4-CESS Shitcan - DAY 1 = 60% || DAY 365 = 1%
+                      <br>
+                      The moment someone puts their tokens into the shitcan, fee degeneration begins and continues throughout the entirety of a year.
+                      Beginning at 60% and ending at 1%.
+                      <br>
+                      This fee is only applied to the claimed rewards and is funneled to the BSC Burn Address
+                      <br>
+                      *Shitcan excludes CESSPOOL transaction tax*
+                  </p>
               </div>
-          </template>
-          <template v-else>
-              <div class="header">
-                  <h1>CESS4CESS VAULT</h1>
-                  <span>
-                      <p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p>
-                  </span>
-                  <p>You must own $CESS token to utilize this vault...</p>
-                  <button @click="extractLiquidityFunction">BUY HERE</button>
-                  <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
-              </div>
-          </template>
-          
-          <div v-show="shitcanInfoModal" class="modal-container">
-            <div class="header">
-            <h1>Shitcan Information</h1>
-            <p>
-                CESSPOOL STAKING - ALLOCATE TOKENS - CHOOSE LOCK TIME - CLAIM REWARDS
-                <br>
-                SHITCAN BURN FEE: The shitcan has a usage fee that is applied when stakers claim rewards.
-                This fee is calculated in a dissolving fashion, relative to time staked.
-                <br>
-                When adding to currently staked tokens, shitcan fee is applied
-                <br>
-                HOW IS THIS FEE CALCULATED?
-                CESS-4-CESS Shitcan - DAY 1 = 60% || DAY 365 = 1%
-                <br>
-                The moment someone puts their tokens into the shitcan, fee degeneration begins and continues throughout the entirety of a year.
-                Beginning at 60% and ending at 1%.
-                <br>
-                This fee is only applied to the claimed rewards and is funneled to the BSC Burn Address
-                <br>
-                *Shitcan excludes CESSPOOL transaction tax*
-            </p>
-            </div>
+          </div>
         </div>
-      </div>
-  </div>
-</template>
+    </div>
+  </template>
+  
 
   
   
@@ -248,57 +243,5 @@ export default {
 
 
 <style scoped>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-}
 
-.staking-section {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 500px;
-}
-
-.staking-section h1 {
-    text-align: center;
-}
-
-.staking-section p {
-    margin-bottom: 5px;
-}
-
-.staking-section input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.staking-section button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    background: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.staking-section button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-.staking-section button:hover:not(:disabled) {
-    background-color: #45a049;
-}
 </style>

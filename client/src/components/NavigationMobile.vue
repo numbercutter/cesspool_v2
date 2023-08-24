@@ -181,7 +181,7 @@ header {
       max-width: 150px;
       height: 100%;
       padding: 0 !important;
-      background-color: #58513d;
+      background-color: #4E4E4E;
       bottom:0;
       left:0;
       margin-left: 0;
