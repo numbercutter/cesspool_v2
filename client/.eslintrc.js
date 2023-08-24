@@ -12,6 +12,8 @@ module.exports = {
     requireConfigFile: false, // Add this line if you don't have a Babel config file
   },
   rules: {
+    'vue/multi-word-component-names': 'off', // Add this line
+    'vue/no-reserved-component-names': 'off', // Add this line
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },

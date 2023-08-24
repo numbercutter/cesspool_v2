@@ -15,7 +15,7 @@
   import { computed, onMounted } from 'vue';
   import { ethers } from "ethers";
   import { handleLogin, handleCurrentUser, handleAccountChange, setupNetworkChangeListener, setupAccountChangeListener } from '../api/ethersConnect';
-  
+
   export default {
       name: "Login",
       setup() {
