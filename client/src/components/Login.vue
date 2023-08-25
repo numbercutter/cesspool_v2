@@ -25,16 +25,19 @@
               await handleLogin(store);
           }
   
-          window.ethereum.on('accountsChanged', (accounts) => {
-              handleAccountChange(store, accounts);
-          });
-          
-          const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-          provider.on("network", (newNetwork, oldNetwork) => {
-              if (oldNetwork) {
-                  window.location.reload();
-              }
-          });
+          if (window.ethereum) {
+            window.ethereum.on('accountsChanged', (accounts) => {
+                handleAccountChange(store, accounts);
+            });
+            
+            const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+            provider.on("network", (newNetwork, oldNetwork) => {
+                if (oldNetwork) {
+                window.location.reload();
+                }
+            });
+            }
+
   
           onMounted(() => {
               handleCurrentUser(store);

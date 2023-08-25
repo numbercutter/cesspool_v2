@@ -38,10 +38,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999; /* or higher depending on the context */
+
   }
   
   .modal-content {
-    background: #fff;
+    background: #000000;
     padding: 20px;
     border-radius: 8px;
     position: relative;

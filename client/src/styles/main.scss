@@ -385,6 +385,19 @@ nav {
 }
 
 
+.loading-bar {
+  width: 0;
+  height: 4px;
+  background-color: #3498db;
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
 
 @font-face {
     font-family: myFirstFont;

@@ -4,12 +4,13 @@
       <!-- Modals -->
       <CustomModal :show="modal.loadingModal" @close="modal.loadingModal = false">
         <div class="modal__content">
-          <!-- Loading content here -->
+          <div>Loading...</div>
         </div>
       </CustomModal>
       <CustomModal :show="modal.txnModal.status" @close="modal.txnModal.status = false">
         <div class="modal__content">
           <p>{{ modal.txnModal.hash }}</p>
+          <p>Transaction hash</p>
         </div>
       </CustomModal>
       <!-- End of Modals -->
@@ -28,7 +29,6 @@
         </div>
         <button @click="modal.loadingModal = !modal.loadingModal">Toggle Loading Modal</button>
         <button @click="modal.txnModal.status = !modal.txnModal.status">Toggle Txn Modal</button>
-
         <router-view />
       </div>
     </div>
