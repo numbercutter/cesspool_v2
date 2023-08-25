@@ -10,7 +10,11 @@ const store = createStore({
       provider: null,
       nfts: [],
       txn: [],
-      modal: [],
+      modal: {
+        loadingModal: false,
+        txnModal: { status: false, hash: '' },
+      },
+      
       swtnfts: {},
       cess: null,
       cesspoolContract: {address: cesspoolAddress, abi: cesspoolABI}
@@ -42,9 +46,14 @@ const store = createStore({
     setTxnHistory (state, txn) {
       state.txn = txn
     },
-    setModal (state, modal) {
-      state.modal = modal
+    setLoadingModal(state, value) {
+      state.modal.loadingModal = value;
     },
+    setTxnModal(state, payload) {
+      state.modal.txnModal.status = payload.status;
+      state.modal.txnModal.hash = payload.hash;
+    },
+    
     setSwtNfts (state, swtnfts) {
       state.swtnfts = swtnfts
     },

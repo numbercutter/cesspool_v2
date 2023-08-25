@@ -14,7 +14,7 @@
                 <div class="label">Locking Amount: <span class="fill">{{ lockNumber }} $CESS/BNB LP</span></div>
                 
                 <input type="range" v-model="days" class="retro-slider" min="1" max="365" />
-                <div class="label">Locking Time (BETWEEN 1 AND 365 DAYS): <span class="fill">{{ days }} DAY(S)</span></div>
+                <div class="label">Locking Time (1 - 365 DAYS): <span class="fill">{{ days }} DAY(S)</span></div>
                 
                 <button class="stake-button" @click="lockLiquidity">Stake</button>
             </div>
@@ -50,7 +50,7 @@
       </template>
 
       <div v-show="shitcanInfoModal" class="info-container">
-            <div class="header">
+            <div class="header-section">
                 <h1>Shitcan Information</h1>
                 <p>
                     CESSPOOL STAKING - ALLOCATE TOKENS - CHOOSE LOCK TIME - CLAIM REWARDS

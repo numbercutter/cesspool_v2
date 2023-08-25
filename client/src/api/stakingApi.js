@@ -3,7 +3,9 @@ import { BigNumber } from 'ethers';
 
 export async function lockLiq(store, cesspoolSC, cessVaultAddress, cess4cessSC, lockNumber, days) {
   try {
-    store.state.modal["loadingModal"] = true;
+    console.log(store.state.modal['loadingModal'])
+    store.commit('setLoadingModal', true);
+    console.log(store.state.modal['loadingModal'])
     const lockTime = days * 86400;
     const decimals = 18;
     const input = lockNumber;
@@ -23,46 +25,43 @@ export async function lockLiq(store, cesspoolSC, cessVaultAddress, cess4cessSC, 
     const link = `https://bscscan.com/tx/${transactionLock.hash}`;
     console.log(link);
 
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["hash"] = link;
-    store.state.modal["txnModal"]["status"] = true;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
     console.error('An error occurred:', error);
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["status"] = false;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: false });
   }
 }
 
 export const extractLiquidity = async (store, cess4cessSC) => {
   try {
-    store.state.modal["loadingModal"] = true;
+    store.commit('setLoadingModal', true);
     const transactionUnlock = await cess4cessSC.extractLiquidity();
     await transactionUnlock.wait();
 
     const link = `https://bscscan.com/tx/${transactionUnlock.hash}`;
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["hash"] = link;
-    store.state.modal["txnModal"]["status"] = true;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
     console.error('An error occurred:', error);
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["status"] = false;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: false });
   }
 };
 
 export const extractEarnings = async (store, cess4cessSC) => {
   try {
-    store.state.modal["loadingModal"] = true;
+    store.commit('setLoadingModal', true);
     const earnings = await cess4cessSC.extractEarnings();
     await earnings.wait();
     const link = `https://bscscan.com/tx/${earnings.hash}`;
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["hash"] = link;
-    store.state.modal["txnModal"]["status"] = true;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
     console.error('An error occurred:', error);
-    store.state.modal["loadingModal"] = false;
-    store.state.modal["txnModal"]["status"] = false;
+    store.commit('setLoadingModal', false);
+    store.commit('setTxnModal', { status: false });
   }
 };
 

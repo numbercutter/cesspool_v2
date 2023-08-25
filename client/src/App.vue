@@ -37,7 +37,10 @@
 <script>
 import NavigationMobile from './components/NavigationMobile.vue';
 import NavigationDesktop from './components/NavigationDesktop.vue';
-import { ref, reactive } from 'vue'; // Import reactive
+import { ref } from 'vue'; // Import reactive
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 import Login from '@/components/Login.vue';
 import CustomModal from '@/components/CustomModal.vue';
 
@@ -50,12 +53,11 @@ export default {
     CustomModal, // Add VueFinalModal to components
   },
   setup() {
+    const store = useStore();
     const isActive = ref(false);
-    const modal = reactive({ // Initialize modal state
-      loadingModal: false,
-      txnModal: {status: false, hash: ''}
-    });
     
+    const modal = computed(() => store.state.modal); // Access modal state from the store
+
     const lightMode = async () => {
       isActive.value = !isActive.value;
       document.body.classList.toggle("light_mode", isActive.value);
