@@ -1,31 +1,39 @@
 <!-- src/components/CustomModal.vue -->
 <template>
-    <div v-if="show" class="modal">
-      <div class="modal-content">
-        <button @click="closeModal" class="close-button">X</button>
-        <slot></slot>
-      </div>
+  <div v-if="show" class="modal" @click="closeModalOnOutsideClick">
+    <div class="modal-content" @click.stop>
+      <button @click="closeModal" class="close-button">X</button>
+      <slot></slot>
     </div>
-  </template>
-  
-  <script>
-  import { defineComponent } from 'vue';
-  
-  export default defineComponent({
-    props: {
-      show: Boolean,
-    },
-    setup(props, { emit }) {
-      const closeModal = () => {
-        emit('close');
-      };
-  
-      return {
-        closeModal,
-      };
-    },
-  });
-  </script>
+  </div>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  props: {
+    show: Boolean,
+  },
+  setup(props, { emit }) {
+    const closeModal = () => {
+      emit('close');
+    };
+
+    const closeModalOnOutsideClick = (event) => {
+      if (event.target.classList.contains('modal')) {
+        closeModal();
+      }
+    };
+
+    return {
+      closeModal,
+      closeModalOnOutsideClick,
+    };
+  },
+});
+</script>
+
   
   <style scoped>
   .modal {

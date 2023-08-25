@@ -1,41 +1,36 @@
 <template>
     <div>
         <div>
-            <select name="cars" id="cars">
-                <option value="volvo">WildNFTs</option>
-                <option value="saab">ReserveNFTs</option>
-                <option value="opel">Avatars</option>
-                <option value="audi">ReserveItems</option>
+            <select name="menu" id="menu" v-model="selected.value">
+                <option value="about">About</option>
+                <option value="team">Team</option>
+                <option value="tokenomics">Tokenomics</option>
+                <option value="tools">Tools</option>
             </select>
-            
-        </div>
-        <div>
-            <select name="cars" id="cars">
-                <option value="volvo">Lion</option>
-                <option value="saab">Buffalo</option>
-                <option value="opel">Giraffe</option>
-                <option value="audi">Impala</option>
-            </select>
-            
-        </div>
-        <div>
-            <select name="cars" id="cars">
-                <option value="volvo">Game Park 1</option>
-                <option value="saab">Game Park 2</option>
-                <option value="opel">Game Park 3</option>
-                <option value="audi">Game Park 4</option>
-            </select>
-            <br><br>
         </div>
     </div>
 </template>
 
 <script>
+import { ref, watch } from 'vue';
+
 export default {
-    name: "Filter"
+    name: "Filter",
+    props: {
+        value: String
+    },
+    setup(props, { emit }) {
+        const selected = ref(props.value);
+
+        watch(selected, (val) => {
+            emit('input', val);
+        });
+
+        return { selected };
+    }
 }
 </script>
 
 <style>
-
+  /* Add your styling for the filter here */
 </style>
