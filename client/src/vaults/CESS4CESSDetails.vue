@@ -1,6 +1,6 @@
 <template>
     <div id="vault_container">
-        <div v-show="vaultModal" class="modal-container">
+        <div class="modal-container">
             <template v-if="isBalanced">
                 <div id="staking_container">
                     <div class="header-section">
@@ -9,13 +9,16 @@
                         <span class="apr-info"><p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p></span>
                     </div>
                     <div class="lock-section">
-                        <div class="slider-wrapper">
-                            <slider v-model="lockNumber" color="black" track-color="green" :height='15' :max="balanceAmount" :min="0"/>
-                            <span class="amount"><p>Locking Amount: <span class="fill"> {{ lockNumber }} </span> $CESS</p></span>
-                            <slider v-model="days" color="black" track-color="green" :height='15' :max="365" :min="1"/>
-                            <span class="time"><p>Locking Time (BETWEEN 1 AND 365 DAYS): <span class="fill"> {{ days }} </span> DAY(S)</p></span>
+                        <div class="slider-container">
+                            <input type="range" v-model="lockNumber" class="retro-slider" min="0" :max="balanceAmount" />
+                            <div class="label">Locking Amount: <span class="fill">{{ lockNumber }} $CESS</span></div>
+                            
+                            <input type="range" v-model="days" class="retro-slider" min="1" max="365" />
+                            <div class="label">Locking Time (BETWEEN 1 AND 365 DAYS): <span class="fill">{{ days }} DAY(S)</span></div>
+                            
+                            <button class="stake-button" @click="lockLiquidity">Stake</button>
                         </div>
-                        <button class="stake-button" @click="lockLiquidity">Stake</button>
+
                     </div>
                     <template v-if="isStaked">
                         <div class="unlock-section">
@@ -33,7 +36,7 @@
                         </div>
                     </template>
                     <div class="back-link">
-                      <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
+                      <a><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
                     </div>
                 </div>
             </template>
@@ -46,7 +49,7 @@
                     <p>You must own $CESS token to utilize this vault...</p>
                     <button class="buy-button" @click="extractLiquidityFunction">BUY HERE</button>
                     <div class="back-link">
-                      <a @click="vaultModal"><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
+                      <a><router-link :to="{ name: 'Shitcans' }" class="link">Back</router-link></a>
                     </div>
                 </div>
             </template>
@@ -87,7 +90,6 @@
 import { cessVaultAddress, cessVaultABI } from '../contracts/cess4cess.sol/cess4cess';
 import { ref, onMounted, computed, watch } from 'vue'
 import { useStore } from "vuex";
-import slider from "vue3-slider"
 
 import { lockLiq, extractLiquidity, extractEarnings, getStaked } from '../api/stakingApi'
 
@@ -95,9 +97,7 @@ import { lockLiq, extractLiquidity, extractEarnings, getStaked } from '../api/st
 
 export default {
     name: 'CESS4CESSDetails',
-    components: {
-        slider,
-    },
+
     setup() {
 
         const { Contract } = require('ethers');
@@ -112,11 +112,11 @@ export default {
         const lockNumber = ref(1)
         const days = ref(1)
         const balanceAmount = ref(store.state.cess)
+        console.log(balanceAmount)
         const stakedAmount = ref(null)
         const earningsAfterFee = ref(null)
         const ror = ref(null)
         const timeRemaining = ref(null)
-        const vaultModal = ref(true)
 
 
         const getStakedData = async () => {
@@ -232,7 +232,6 @@ export default {
             balanceAmount,
             stakedAmount,
             shitcanInfoModal,
-            vaultModal,
             isBalanced: computed(() => balanceAmount.value > 0),
             isStaked: computed(() => stakedAmount.value > 0),
             isUnlocked: computed(() => timeRemaining.value == "stake is unlocked")
