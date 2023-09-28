@@ -27,8 +27,7 @@
         <div id="light_mode_button">
           <img src="./assets/img/dl.webp" @click="lightMode" class="theme_img">
         </div>
-        <button @click="modal.loadingModal = !modal.loadingModal">Toggle Loading Modal</button>
-        <button @click="modal.txnModal.status = !modal.txnModal.status">Toggle Txn Modal</button>
+
         <router-view />
       </div>
     </div>
