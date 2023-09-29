@@ -15,6 +15,7 @@
     "compression-webpack-plugin": "10.0.0",
     "core-js": "^3.32.1",
     "ethers": "5.7.0",
+    "jsesc": "^3.0.2",
     "primevue": "^3.32.2",
     "vue": "^3.3.4",
     "vue-final-modal": "^4.4.5",
