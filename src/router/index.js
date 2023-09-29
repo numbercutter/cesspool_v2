@@ -28,10 +28,7 @@ const routes = [
     component: CESS4CESSDetails,
     props: true,
     beforeEnter: (to, from, next) => {
-      const address = store.getters.address;
-      console.log(address)
-      const cess = store.getters.cess;
-      console.log(cess)
+      const address = store.getters.address; 
       if (!address) {
         next('/Shitcans'); 
       } else {
@@ -45,10 +42,7 @@ const routes = [
     component: PSWAPCESSBNBDetails,
     props: true,
     beforeEnter: (to, from, next) => {
-      const address = store.getters.address;
-      console.log(address)
-      const cess = store.getters.cess;
-      console.log(cess)
+      const address = store.getters.address; 
       if (!address) {
         next('/Shitcans'); 
       } else {

@@ -3,9 +3,8 @@ import { BigNumber } from 'ethers';
 
 export async function lockLiq(store, cesspoolSC, cessVaultAddress, cess4cessSC, lockNumber, days) {
   try {
-    console.log(store.state.modal['loadingModal'])
     store.commit('setLoadingModal', true);
-    console.log(store.state.modal['loadingModal'])
+    
     const lockTime = days * 86400;
     const decimals = 18;
     const input = lockNumber;
@@ -16,19 +15,18 @@ export async function lockLiq(store, cesspoolSC, cessVaultAddress, cess4cessSC, 
     const allowanceAmount = transactionAllowance.toString();
 
     if (Number(allowanceAmount) < Number(lockAmount)) {
-      const transactionApprove = await cesspoolSC.approve(cessVaultAddress.toString(), "1000000000000000000000000000");
-      console.log(transactionApprove);
+      await cesspoolSC.approve(cessVaultAddress.toString(), "1000000000000000000000000000");
+      
     }
 
     const transactionLock = await cess4cessSC.lockLiquidity(lockAmount, lockTime.toString());
     await transactionLock.wait();
     const link = `https://bscscan.com/tx/${transactionLock.hash}`;
-    console.log(link);
+    
 
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
-    console.error('An error occurred:', error);
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: false });
   }
@@ -44,7 +42,6 @@ export const extractLiquidity = async (store, cess4cessSC) => {
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
-    console.error('An error occurred:', error);
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: false });
   }
@@ -59,7 +56,6 @@ export const extractEarnings = async (store, cess4cessSC) => {
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: true, hash: link });
   } catch (error) {
-    console.error('An error occurred:', error);
     store.commit('setLoadingModal', false);
     store.commit('setTxnModal', { status: false });
   }
@@ -79,7 +75,6 @@ export const getStaked = async (store, cess4cessSC, cesspoolSC) => {
 
     return { stakedAmount, balanceAmount };
   } catch (error) {
-    console.error('An error occurred:', error);
     return { stakedAmount: 0, balanceAmount: 0 }; // You can change this to a default or error state as needed
   }
 };

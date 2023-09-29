@@ -103,7 +103,7 @@ export default {
         const lockNumber = ref(1);
         const days = ref(1);
         const balanceAmount = ref(store.state.cess)
-        console.log(balanceAmount)
+        
         const stakedAmount = ref(null);
         const earningsAfterFee = ref(null);
         const ror = ref(null);
@@ -184,7 +184,7 @@ export default {
             }
         }
           const checkCurrentUser = () => {
-              console.log(provider)
+              
               if (provider) {
                   getStakedData()
               } else {

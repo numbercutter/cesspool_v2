@@ -56,8 +56,7 @@ export const handleAccountChange = (store, accounts) => {
       store.commit('setUser', signer);
       store.commit('setAccountAddress', accounts[0]);
     } else {
-      store.state.modal["loginModal"] = true
-      console.log("accountlenght")
+      store.state.modal["loginModal"] = true 
       store.commit('setProvider', null)
       store.commit('setUser', 0)
       store.commit('setAccountAddress', null)
