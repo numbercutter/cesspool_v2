@@ -3,16 +3,16 @@
       <div class="grid">
           <ShitcanCard 
               :name="'CESS4CESSDetails'"
-              :image="'https://static01.nyt.com/images/2014/07/23/upshot/23UP-cat/23UP-cat-articleLarge.jpg?quality=75&auto=webp&disable=upscale'"
+              :image="require('@/assets/img/shitcan.webp')"
               :vehicles="'CESS 4 CESS VAULT'"
-              :availableEarnings="'$222'"
+              :availableEarnings="'CLICK TO ENTER'"
               :approximateReturn="'STAKING VAULT'"
           />
           <ShitcanCard 
               :name="'PSWAPCESSBNBDetails'"
-              :image="'https://static01.nyt.com/images/2014/07/23/upshot/23UP-cat/23UP-cat-articleLarge.jpg?quality=75&auto=webp&disable=upscale'"
+              :image="require('@/assets/img/shitcan.webp')"
               :vehicles="'LIQUIDITY POOL VAULT'"
-              :availableEarnings="'$333'"
+              :availableEarnings="'CLICK TO ENTER'"
               :approximateReturn="'STAKING VAULT'"
           />
       </div>
