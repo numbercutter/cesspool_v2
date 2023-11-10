@@ -4,7 +4,6 @@
       <div class="top_content">
         <h1>CESSPOOL</h1>
         <h2>EAT SHIT, GET RUGGED</h2>
-        <p>0x40e8b78546fc1f38758799858742950654e7364b</p>
         <br>
         <div class="button-container">
           <a :href="'https://poocoin.app/tokens/0x40e8b78546fc1f38758799858742950654e7364b'" class="button-link" target="_blank">

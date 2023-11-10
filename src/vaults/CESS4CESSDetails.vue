@@ -5,8 +5,9 @@
                 <div id="staking_container">
                     <div class="header-section">
                         <h1>CESSPOOL VAULT</h1>
-                        <button class="info-button" @click="shitcanInfoModal = !shitcanInfoModal">Shitcan Info</button>
+
                         <span class="apr-info"><p>Aprox. APR/yr: <span class="fill"> {{ ror }} </span> %</p></span>
+                        <button class="info-button" @click="shitcanInfoModal = !shitcanInfoModal">Shitcan Info</button>
                     </div>
                     <div class="lock-section">
                         <div class="slider-container">
