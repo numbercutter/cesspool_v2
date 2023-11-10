@@ -9,13 +9,13 @@ yarn/npm install
 ### Compiles and hot-reloads for development
 
 ```
-yarn/npm serve
+yarn/npm run serve
 ```
 
 ### Compiles and minifies for production
 
 ```
-yarn/npm build
+yarn/npm run build
 ```
 
 ### Lints and fixes files

@@ -1,58 +1,60 @@
-<template>
+ <template>
   <div class="content_grid home">
     <div class="top_container">
       <div class="top_content">
-        <h1>CESSPOOL.COMPANY</h1>
-        <p>EAT SHIT, GET RUGGED</p>
+        <h1>CESSPOOL</h1>
+        <h2>EAT SHIT, GET RUGGED</h2>
+        <p>0x40e8b78546fc1f38758799858742950654e7364b</p>
+        <br>
+        <div class="button-container">
+          <a :href="'https://poocoin.app/tokens/0x40e8b78546fc1f38758799858742950654e7364b'" class="button-link" target="_blank">
+            Poocoin Chart
+          </a>
+          <a :href="'https://bscscan.com/token/0x40e8b78546fc1f38758799858742950654e7364b'" class="button-link" target="_blank">
+            BSCSCAN
+          </a> 
+          <a :href="'https://pancakeswap.finance/swap?inputCurrency=0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c&outputCurrency=0x40e8b78546fc1f38758799858742950654e7364b'" class="button-link" target="_blank">
+            PANCAKESWAP
+          </a>
+        </div> 
       </div>
     </div>
     
-    <div class="filter_container">
-      <select name="menu" id="menu" v-model="selectedSection">
-        <option value="about">About</option>
-        <option value="team">Team</option>
-        <option value="tokenomics">Tokenomics</option>
-        <option value="tools">Tools</option>
-      </select>
-    </div>
-    
+    <ul class="tab-bar">
+      <li @click="selectedSection = 'about'" :class="{ active: selectedSection === 'about' }">About</li>
+      <li @click="selectedSection = 'gaming'" :class="{ active: selectedSection === 'gaming' }">Gaming</li>
+      <li @click="selectedSection = 'tokenomics'" :class="{ active: selectedSection === 'tokenomics' }">Tokenomics</li>
+      <li @click="selectedSection = 'tools'" :class="{ active: selectedSection === 'tools' }">Tools</li>
+    </ul>
     <div v-if="selectedSection === 'about'" class="landing_container">
-      <div class="modal-container">
-        <div class="header-section">
-          <h3 class="intro">Dear Demons,</h3>
-          <p class="intro-p" style="text-align: left; display: inline-block; padding: 0px 0px;">
-            CESSPOOL is more than a token... it's a religion.<br><br>
-            The concept was birthed from the idea that the virtual world is a shithole full of demon tactics. <br>
-            With so many crypto projects/influencers scamming their way to riches, CESSPOOL puts a mirror to this by openly telling investors that it is scamming them. <br><br>
-            Latching onto dark humor, reverse psychology and unorothodox marketing tactics, $CESS is a POOL of constant suprises. <br><br>
-            Everyone has a demon side. Do you have the guts to face it? <br><br>
-            DEMON UP,
-            <br>
-            Mr. CESS
-          </p>
-        </div>
-      </div>
+      <About/>
     </div>
-    <div v-if="selectedSection === 'team'">
-      <h2>Our Team</h2>
-      <p>Meet our dedicated team of professionals...</p>
+
+    <div v-if="selectedSection === 'gaming'">
+      <h2>Esports Gaming Team</h2>
+      <p>Coming Soon...</p>
     </div>
     <div v-if="selectedSection === 'tokenomics'">
-      <h2>Tokenomics</h2>
-      <p>Learn about our token structure and distribution...</p>
+      <Tokenomics/>
     </div>
     <div v-if="selectedSection === 'tools'">
       <h2>Tools</h2>
-      <p>Explore our range of tools and services...</p>
+      <p>Coming Soon...</p>
     </div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
+import Tokenomics from '@/components/Tokenomics.vue';
+import About from '@/components/About.vue';
 
 export default {
-  name: 'Home',
+  name: "Home",
+  components: {
+    Tokenomics,
+    About
+  },
   setup() {
     const selectedSection = ref('about'); // Default selection
     return { selectedSection };
@@ -61,5 +63,92 @@ export default {
 </script>
 
 <style scoped>
-  /* Add your styling here */
+.tab-bar {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  /* Styles for larger screens */
+}
+
+.tab-bar li {
+  padding: 15px 30px;
+  cursor: pointer;
+  color: white;
+  border-bottom: 3px solid transparent;
+}
+
+/* ... other styles ... */
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .tab-bar {
+    flex-direction: column; /* Stack tabs vertically */
+  }
+
+  .tab-bar li {
+    padding: 15px; /* Adjust padding for mobile */
+    text-align: center; /* Center text for readability */
+    border-bottom: 1px solid #444; /* Add a border between items */
+  }
+
+  /* Additional mobile-specific styles can go here */
+}
+
+.tab-bar li:hover {
+  background-color: #444;
+}
+
+.tab-bar li.active {
+  color: #4CAF50; /* Highlight color for the active tab */
+  border-bottom: 3px solid #4CAF50; /* Active tab */
+}
+.button-link {
+  display: inline-block;
+  background-color: #000000; /* Example button color */
+  color: rgb(255, 0, 255);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-link h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px; /* Add space between buttons */
+  margin-top: 20px;
+}
+
+.button-link {
+  background-color: #000000; /* Example button color */
+  color: rgb(255, 0, 255);
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+  background-color: #333333; /* Darken button on hover */
+}
+
+@media (max-width: 768px) {
+  .button-link {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
 </style>
