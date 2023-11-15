@@ -72,11 +72,10 @@
   }
   
   .token-allocation-title, #tokenomics-title {
-    font-size: 50px;
-    margin-top: 50px;
+    font-size: 50px; /* Adjust for smaller screens */
+    margin-top: 20px; /* Reduced margin */
     text-shadow: -1px 0 rgb(102, 255, 0), 0 1px rgb(255, 0, 191), 1px 0 rgb(255, 255, 255), 0 -1px rgb(255, 255, 255);
   }
-  
   .token-list, .wallet-links, .tokenomics-list {
     list-style-type: none;
     padding: 15px;
@@ -90,6 +89,8 @@
   
   .token-list li, .wallet-links li, .tokenomics-list li {
     margin: 10px 0;
+    width: 100%; /* Full width for smaller screens */
+
   }
   
   .wallet-links a, .tokenomics-list a {
@@ -102,4 +103,21 @@
   }
   
   /* Add more styles as needed */
+
+
+  /* Responsive design for small screens */
+@media (max-width: 320px) {
+  .token-allocation-title, #tokenomics-title {
+    font-size: 24px; /* Smaller font size for small screens */
+    margin-top: 10px;
+  }
+
+  .token-list, .wallet-links, .tokenomics-list {
+    padding: 10px;
+  }
+
+  .token-list li, .wallet-links li, .tokenomics-list li {
+    font-size: 14px; /* Smaller font size for list items */
+  }
+}
   </style>
