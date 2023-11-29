@@ -19,6 +19,10 @@ export const handleCurrentUser = async (store) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     const chain = await provider.getNetwork(1)
     if (chain.name != "bnb") {
+        // Ensure the object exists before setting properties
+        if (!store.state.modal["messageModal"]) {
+            store.state.modal["messageModal"] = {};
+        }
         store.state.modal["messageModal"]["message"] = "switching network...";
         store.state.modal["messageModal"]["status"] = true;
         window.ethereum.request({
@@ -44,6 +48,10 @@ export const handleCurrentUser = async (store) => {
       store.commit('setUser', signer);
       store.commit('setAccountAddress', accounts[0]);
     } else {
+      // Ensure the object exists before setting properties
+      if (!store.state.modal["loginModal"]) {
+          store.state.modal["loginModal"] = {};
+      }
       store.state.modal["loginModal"] = true
     }
 }
